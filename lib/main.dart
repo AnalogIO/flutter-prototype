@@ -37,20 +37,21 @@ class App extends StatelessWidget {
       title: _title,
       theme: ThemeData(
         primaryColor: Color(0xff362619),
-        primaryColorBrightness: Brightness.light,
+        primaryColorBrightness: Brightness.dark,
         primaryTextTheme: TextTheme(title: TextStyle(color: Color(0xffFAFAFA))),
         primaryIconTheme: IconThemeData(color: Color(0xffE5E2D7)),
         canvasColor: Color(0xffE5E2D7),
       ),
       color: Colors.black,
       home: LoginPage(),
+      routes: <String, WidgetBuilder> {
+        '/home': (BuildContext context) => HomePage(),
+      },
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
