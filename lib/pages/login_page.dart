@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../components/login_image.dart';
 import '../components/login_title.dart';
 import '../components/login_input.dart';
-import '../components/login_image.dart';
+import '../components/login_passwordhint.dart';
+import '../components/login_cta.dart';
 import '../components/numpad.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,10 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void _onTapped() {
-    // Navigator.pushReplacementNamed(context, '/home'); REPLACE LATER
-    Navigator.pushNamed(context, '/home');
-  }
   void _onHelpPressed() {
     Navigator.pushNamed(context, '/home');
   }
@@ -31,12 +29,13 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(60),
+              padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
                 color: Color(0xff362619)
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   LoginImage(),
                   Padding(
@@ -44,6 +43,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: LoginTitle('Sign in'),
                   ),
                   LoginForm(),
+                  LoginPasswordHint(type: LoginInputType.Email),
+                  LoginCTA("Don't have an account? Make one >>")
                 ],
               )
             ),

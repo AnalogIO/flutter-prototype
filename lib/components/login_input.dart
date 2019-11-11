@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class LoginForm extends StatefulWidget {
   @override
-  LoginFormState createState() {
-    return LoginFormState();
-  }
+  LoginFormState createState() => LoginFormState();
 }
 
 class LoginFormState extends State<LoginForm> {
@@ -31,10 +28,9 @@ class LoginFormState extends State<LoginForm> {
           Container(
             alignment: Alignment.topRight,
             child: _nextIconButton
+          )
+        ],
       )
-    ],
-  )
-      
     );
   }
 }
@@ -56,6 +52,7 @@ class LoginInput extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: "Email...",
+        helperText: "", // To ensure consistent height of widget
         contentPadding: EdgeInsets.fromLTRB(24, 16, 64, 16),
         errorStyle: TextStyle(color: Colors.orange),
         fillColor: Colors.white,
@@ -71,10 +68,14 @@ class LoginInput extends StatelessWidget {
       onSaved: (value) {
         if (_formKey.currentState.validate()) {
           FocusScope.of(context).unfocus();
+          // _formKey.currentState.reset();
           Navigator.pushNamed(context, '/home');
         }
       },
       validator: (value) {
+        if (value.isEmpty) {
+          return 'Enter an email';
+        }
         if (!_regExEmail.hasMatch(value)) {
           return 'Enter a valid email';
         }

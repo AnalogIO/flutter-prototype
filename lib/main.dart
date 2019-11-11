@@ -45,6 +45,9 @@ class App extends StatelessWidget {
       color: Colors.black,
       home: LoginPage(),
       routes: <String, WidgetBuilder> {
+        '/login': (BuildContext context) => LoginPage(),
+        // '/login/password': (BuildContext context) => LoginPage(),
+        // '/login/register': (BuildContext context) => LoginPage(),
         '/home': (BuildContext context) => HomePage(),
       },
     );
