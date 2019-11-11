@@ -15,14 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void _onTapped() async {
-
-    //Request testing
-    //var response = await Request.makeRequest("/");
-
-    // Navigator.pushReplacementNamed(context, '/home'); REPLACE LATER
-    Navigator.pushNamed(context, '/home');
-  }
   void _onHelpPressed() {
     Navigator.pushNamed(context, '/home');
   }
