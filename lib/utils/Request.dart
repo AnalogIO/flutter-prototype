@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-class Request{
+class Request {
 
   static final String API_ENDPOINT = "";
   static final String USER_AGENT = "";
