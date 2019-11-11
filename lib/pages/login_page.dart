@@ -4,13 +4,20 @@ import '../components/login_input.dart';
 import '../components/login_image.dart';
 import '../components/numpad.dart';
 
+//Requests
+import 'package:analog_app/utils/Request.dart' as Request;
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void _onTapped() {
+  void _onTapped() async {
+
+    //Request testing
+    //var response = await Request.makeRequest("/");
+
     // Navigator.pushReplacementNamed(context, '/home'); REPLACE LATER
     Navigator.pushNamed(context, '/home');
   }
