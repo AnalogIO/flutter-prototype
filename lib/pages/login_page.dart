@@ -6,9 +6,6 @@ import '../components/login_passwordhint.dart';
 import '../components/login_cta.dart';
 import '../components/numpad.dart';
 
-//Requests
-import 'package:analog_app/utils/Request.dart' as Request;
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
