@@ -6,12 +6,26 @@ import '../components/login_passwordhint.dart';
 import '../components/login_cta.dart';
 import '../components/numpad.dart';
 
+import '../utils/Request.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  void _login(String email, int password) async {
+    final response = await Request.makeRequest("/test");
+
+    if (response.statusCode == 200){
+      final 
+    } else {
+      Navigator.pushNamed(context, "/");
+    }
+    
+  }
+
   void _onHelpPressed() {
     Navigator.pushNamed(context, '/home');
   }
