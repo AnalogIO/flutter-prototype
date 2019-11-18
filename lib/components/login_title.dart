@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LoginTitle extends StatelessWidget {
-  final String _title;
-  LoginTitle(title) : this._title = title;
+  final String title;
+  LoginTitle(this.title);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      _title,
+      title,
       style: TextStyle(
         color: Colors.white,
         fontSize: 24,

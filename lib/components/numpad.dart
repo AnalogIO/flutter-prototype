@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 
 
 class Numpad extends StatefulWidget {
+  final bool showNumpad;
+  const Numpad(this.showNumpad);
+
   @override
   NumpadState createState() => NumpadState();
 }
@@ -13,7 +16,7 @@ class NumpadState extends State<Numpad> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: false,
+      visible: widget.showNumpad,
       maintainSize: true,
       maintainAnimation: true,
       maintainState: true,
@@ -71,10 +74,10 @@ class NumpadButton extends StatelessWidget {
         HapticFeedback.lightImpact();
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         child: Text(
           _text,
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
         )
       )
     );

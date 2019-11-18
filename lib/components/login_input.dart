@@ -1,6 +1,10 @@
+import 'package:analog_app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
+  final Function changePageFunction;
+  const LoginForm(this.changePageFunction);
+
   @override
   LoginFormState createState() => LoginFormState();
 }
@@ -23,7 +27,7 @@ class LoginFormState extends State<LoginForm> {
         children: <Widget>[
           Container(
             alignment: Alignment.topCenter,
-            child: LoginInput(_formKey)
+            child: LoginInput(_formKey, widget.changePageFunction)
           ),
           Container(
             alignment: Alignment.topRight,
@@ -37,8 +41,9 @@ class LoginFormState extends State<LoginForm> {
 
 class LoginInput extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
-  LoginInput(key) : this._formKey = key;
-  
+  final Function changePageFunction;
+  LoginInput(this._formKey, this.changePageFunction);
+
   final RegExp _regExEmail = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   final _errorBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.orange),
@@ -69,7 +74,8 @@ class LoginInput extends StatelessWidget {
         if (_formKey.currentState.validate()) {
           FocusScope.of(context).unfocus();
           // _formKey.currentState.reset();
-          Navigator.pushNamed(context, '/home');
+          // Navigator.pushNamed(context, '/login/password');
+          changePageFunction(LoginPageStatus.password);
         }
       },
       validator: (value) {

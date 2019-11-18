@@ -43,12 +43,12 @@ class App extends StatelessWidget {
         canvasColor: Color(0xffE5E2D7),
       ),
       color: Colors.black,
-      home: LoginPage(),
+      home: LoginPage(LoginPageStatus.email),
       routes: <String, WidgetBuilder> {
-        '/login': (BuildContext context) => LoginPage(),
-        // '/login/password': (BuildContext context) => LoginPage(),
-        // '/login/register': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => HomePage(),
+        '/login':          (BuildContext context) => LoginPage(LoginPageStatus.email),
+        '/login/password': (BuildContext context) => LoginPage(LoginPageStatus.password),
+        '/login/register': (BuildContext context) => LoginPage(LoginPageStatus.registerEmail),
+        '/home':           (BuildContext context) => HomePage(),
       },
     );
   }
