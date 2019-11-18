@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 class LoginForm extends StatefulWidget {
   final LoginPages page;
   final Function changePageFunction;
+  final Function setInputEmailFunction;
   final Function setInputErrorFunction;
-  const LoginForm(this.page, this.changePageFunction, this.setInputErrorFunction);
+  const LoginForm(
+    this.page,
+    this.changePageFunction,
+    this.setInputEmailFunction,
+    this.setInputErrorFunction
+  );
 
   @override
   LoginFormState createState() => LoginFormState();
@@ -31,7 +37,12 @@ class LoginFormState extends State<LoginForm> {
           children: <Widget>[
             Container(
               alignment: Alignment.topCenter,
-              child: LoginInput(_formKey, widget.changePageFunction, widget.setInputErrorFunction)
+              child: LoginInput(
+                _formKey,
+                widget.changePageFunction,
+                widget.setInputEmailFunction,
+                widget.setInputErrorFunction
+              )
             ),
             Container(
               alignment: Alignment.topRight,
@@ -47,8 +58,14 @@ class LoginFormState extends State<LoginForm> {
 class LoginInput extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
   final Function changePageFunction;
+  final Function setInputEmailFunction;
   final Function setInputErrorFunction;
-  LoginInput(this._formKey, this.changePageFunction, this.setInputErrorFunction);
+  LoginInput(
+    this._formKey,
+    this.changePageFunction,
+    this.setInputEmailFunction,
+    this.setInputErrorFunction
+  );
 
   final RegExp _regExEmail = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   final _errorBorder = OutlineInputBorder(
@@ -64,7 +81,6 @@ class LoginInput extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: "Email...",
-        // helperText: " ", // To ensure consistent height of widget
         contentPadding: EdgeInsets.fromLTRB(24, 16, 64, 16),
         errorStyle: TextStyle(color: Colors.orange, height: 0, fontSize: 0),
         fillColor: Colors.white,
@@ -80,9 +96,10 @@ class LoginInput extends StatelessWidget {
       
       onFieldSubmitted: (value) {_formKey.currentState.save();},
       onSaved: (value) {
+        // Handle email input
         if (_formKey.currentState.validate()) {
           FocusScope.of(context).unfocus();
-          // _formKey.currentState.reset();
+          setInputEmailFunction(value);
           setInputErrorFunction("");
           changePageFunction(LoginPages.password);
         }

@@ -29,9 +29,9 @@ class LoginPasswordInputState extends State<LoginPasswordInput> {
 }
 
 class PasswordCircle extends StatelessWidget {
-  int _circleIndex;
-  int _passwordLength;
-  PasswordCircle(this._circleIndex, this._passwordLength);
+  final int _circleIndex;
+  final int _passwordLength;
+  const PasswordCircle(this._circleIndex, this._passwordLength);
 
   @override
   Widget build(BuildContext context) {

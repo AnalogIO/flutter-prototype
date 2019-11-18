@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
 
-import 'utils/login_pages.dart';
+// import 'utils/login_pages.dart';
 
 const OWNED_TICKETS = [{'espresso': 2}];
 const ALL_TICKETS = {
@@ -45,12 +45,10 @@ class App extends StatelessWidget {
         canvasColor: Color(0xffE5E2D7),
       ),
       color: Colors.black,
-      home: LoginPage(LoginPages.email),
+      home: LoginPage(),
       routes: <String, WidgetBuilder> {
-        '/login':          (BuildContext context) => LoginPage(LoginPages.email),
-        '/login/password': (BuildContext context) => LoginPage(LoginPages.password),
-        '/login/register': (BuildContext context) => LoginPage(LoginPages.registerEmail),
-        '/home':           (BuildContext context) => HomePage(),
+        '/login': (BuildContext context) => LoginPage(),
+        '/home':  (BuildContext context) => HomePage(),
       },
     );
   }
@@ -90,7 +88,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onMenuTapped() {
-    //
+    // handle menu tap
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override

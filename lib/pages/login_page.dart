@@ -12,8 +12,8 @@ import '../utils/login_pages.dart';
 
 class LoginPage extends StatefulWidget {
   // constructor. need?
-  final LoginPages loginPage;
-  const LoginPage(this.loginPage);
+  // final LoginPages loginPage;
+  // const LoginPage(this.loginPage);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -21,40 +21,42 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginPages _loginPage = LoginPages.email;
-  String _inputError = "";
+  String _inputEmail = "";
   String _inputPassword = "";
+  String _inputError = "";
 
+  // Email
+  void _setInputEmail(String newEmail) {
+    setState(() {_inputEmail = newEmail;} );
+  }
+
+  // Password
   String _getInputPassword() => _inputPassword;
-  void _updateInputPassword(String newPassword) {
-    setState(() {_inputPassword = _inputPassword + newPassword;} );
+  void _updateInputPassword(String number) {
+    setState(() {_inputPassword = _inputPassword + number;} );
 
+    // TODO Handle login
     if (_inputPassword.length >= 4) {
-      // TODO Handle complete password
-      _resetInputPassword();
+      _login(_inputEmail, _inputPassword);
     }
   }
   void _resetInputPassword() {
     setState(() {_inputPassword = "";} );
   }
 
-  void _login(String email, int password) async {
+  // Login
+  void _login(String email, String password) async {
     final response = await Request.makeRequest("/test");
 
     if (response.statusCode == 200) {
+      // handle success
     } else {
-      Navigator.pushNamed(context, "/");
+      // handle failure
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
-  // Helper debug function only
-  void _onHelpPressed() {
-    if (_loginPage == LoginPages.email) {
-      _changePage(LoginPages.password);
-    } else {
-      _changePage(LoginPages.email);
-    }
-  }
-
+  // Other page state
   void _changePage(LoginPages newPage) {
     setState(() {
       _loginPage = newPage;
@@ -65,6 +67,15 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _inputError = message;
     });
+  }
+
+  // Helper debug function only
+  void _onHelpPressed() {
+    if (_loginPage == LoginPages.email) {
+      _changePage(LoginPages.password);
+    } else {
+      _changePage(LoginPages.email);
+    }
   }
 
   @override
@@ -86,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
             LoginTitle(_loginPage),
             Visibility(
               visible: showEmailInput,
-              child: LoginForm(_loginPage, _changePage, _setInputError),
+              child: LoginForm(_loginPage, _changePage, _setInputEmail, _setInputError),
               replacement: LoginPasswordInput(_getInputPassword),
             ),
             LoginInputHint(_loginPage, _inputError),
@@ -108,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         children: <Widget>[
           loginUpper,
-          Text(_loginPage.toString() + " " + _getInputPassword()),
+          Text("${_loginPage.toString()} | $_inputEmail | ${_getInputPassword()}"),
           Numpad(_loginPage, _updateInputPassword)
         ]
       ),
