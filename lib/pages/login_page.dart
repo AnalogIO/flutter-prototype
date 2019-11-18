@@ -2,22 +2,17 @@ import 'package:flutter/material.dart';
 import '../components/login_image.dart';
 import '../components/login_title.dart';
 import '../components/login_input.dart';
-import '../components/login_passwordhint.dart';
+import '../components/login_input_password.dart';
+import '../components/login_input_hint.dart';
 import '../components/login_cta.dart';
 import '../components/numpad.dart';
 
 import '../utils/Request.dart';
-
-enum LoginPageStatus {
-  email,
-  password,
-  registerEmail,
-  registerPassword
-}
+import '../utils/login_pages.dart';
 
 class LoginPage extends StatefulWidget {
   // constructor. need?
-  final LoginPageStatus loginPage;
+  final LoginPages loginPage;
   const LoginPage(this.loginPage);
 
   @override
@@ -25,8 +20,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginPageStatus _page = LoginPageStatus.email;
-  bool _showNumpad = true;
+  LoginPages _loginPage = LoginPages.email;
+  String _inputError = "";
+  String _inputPassword = "";
+
+  String _getInputPassword() => _inputPassword;
+  void _updateInputPassword(String newPassword) {
+    setState(() {_inputPassword = _inputPassword + newPassword;} );
+
+    if (_inputPassword.length >= 4) {
+      // TODO Handle complete password
+      _resetInputPassword();
+    }
+  }
+  void _resetInputPassword() {
+    setState(() {_inputPassword = "";} );
+  }
 
   void _login(String email, int password) async {
     final response = await Request.makeRequest("/test");
@@ -37,45 +46,54 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // Helper debug function only
   void _onHelpPressed() {
-    // Navigator.pushNamed(context, '/login/password');
-    setState(() => _page = LoginPageStatus.password);
+    if (_loginPage == LoginPages.email) {
+      _changePage(LoginPages.password);
+    } else {
+      _changePage(LoginPages.email);
+    }
   }
 
-  void _changePage(LoginPageStatus newPage) {
+  void _changePage(LoginPages newPage) {
     setState(() {
-      _page = newPage;
+      _loginPage = newPage;
+    });
+  }
+
+  void _setInputError(String message) {
+    setState(() {
+      _inputError = message;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    String loginTitle;
-    if (_page == LoginPageStatus.email) loginTitle = "Sign in";
-    if (_page == LoginPageStatus.password) loginTitle = "Kian";
-    if (_page == LoginPageStatus.registerEmail) loginTitle = "Register";
+    bool showEmailInput = _loginPage == LoginPages.email || _loginPage == LoginPages.registerEmail;
 
     Widget loginUpper = Expanded(
       child: Container(
-          padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
-          color: Color(0xff362619),
-          // Rounded bottom corners
-          // decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
-          //     color: Color(0xff362619)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LoginImage(),
-              Padding(
-                padding: EdgeInsets.only(top: 24, bottom: 16),
-                child: LoginTitle(loginTitle),
-          ),
-          LoginForm(_changePage),
-          LoginPasswordHint(type: LoginInputType.Email),
-          LoginCTA("Don't have an account? Make one >>", _changePage)
-        ],
-      )),
+        padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
+        color: Color(0xff362619),
+        // Rounded bottom corners
+        // decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
+        //     color: Color(0xff362619)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            LoginImage(),
+            LoginTitle(_loginPage),
+            Visibility(
+              visible: showEmailInput,
+              child: LoginForm(_loginPage, _changePage, _setInputError),
+              replacement: LoginPasswordInput(_getInputPassword),
+            ),
+            LoginInputHint(_loginPage, _inputError),
+            LoginCTA(_loginPage, _changePage)
+          ],
+        )
+      )
     );
 
     return Scaffold(
@@ -90,8 +108,8 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         children: <Widget>[
           loginUpper,
-          Text(_page.toString()),
-          Numpad(_showNumpad)
+          Text(_loginPage.toString() + " " + _getInputPassword()),
+          Numpad(_loginPage, _updateInputPassword)
         ]
       ),
     );

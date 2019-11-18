@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
 
+import 'utils/login_pages.dart';
+
 const OWNED_TICKETS = [{'espresso': 2}];
 const ALL_TICKETS = {
   'filter' : {
@@ -43,11 +45,11 @@ class App extends StatelessWidget {
         canvasColor: Color(0xffE5E2D7),
       ),
       color: Colors.black,
-      home: LoginPage(LoginPageStatus.email),
+      home: LoginPage(LoginPages.email),
       routes: <String, WidgetBuilder> {
-        '/login':          (BuildContext context) => LoginPage(LoginPageStatus.email),
-        '/login/password': (BuildContext context) => LoginPage(LoginPageStatus.password),
-        '/login/register': (BuildContext context) => LoginPage(LoginPageStatus.registerEmail),
+        '/login':          (BuildContext context) => LoginPage(LoginPages.email),
+        '/login/password': (BuildContext context) => LoginPage(LoginPages.password),
+        '/login/register': (BuildContext context) => LoginPage(LoginPages.registerEmail),
         '/home':           (BuildContext context) => HomePage(),
       },
     );
@@ -65,6 +67,7 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
+  // TODO: These two lists can be optimized
   static const List<String> _tabNames = <String>[
     'Tickets',
     'Receipts',
@@ -72,7 +75,6 @@ class _HomePageState extends State<HomePage> {
     'Settings',
     'About'
   ];
-
   static final List<Widget> _widgetOptions = <Widget>[
     PageTickets(),
     PageReceipts(),

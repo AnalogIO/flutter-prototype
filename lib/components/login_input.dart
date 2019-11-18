@@ -1,9 +1,11 @@
-import 'package:analog_app/pages/login_page.dart';
+import 'package:analog_app/utils/login_pages.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
+  final LoginPages page;
   final Function changePageFunction;
-  const LoginForm(this.changePageFunction);
+  final Function setInputErrorFunction;
+  const LoginForm(this.page, this.changePageFunction, this.setInputErrorFunction);
 
   @override
   LoginFormState createState() => LoginFormState();
@@ -16,25 +18,28 @@ class LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final _nextIconButton = IconButton(
       splashColor: Colors.transparent,
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
       icon: Icon(Icons.arrow_forward),
       onPressed: () {_formKey.currentState.save();},
     );
   
-    return Form(
-      key: _formKey,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.topCenter,
-            child: LoginInput(_formKey, widget.changePageFunction)
-          ),
-          Container(
-            alignment: Alignment.topRight,
-            child: _nextIconButton
-          )
-        ],
-      )
+    return SizedBox(
+      height: 50,
+      child: Form(
+        key: _formKey,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.topCenter,
+              child: LoginInput(_formKey, widget.changePageFunction, widget.setInputErrorFunction)
+            ),
+            Container(
+              alignment: Alignment.topRight,
+              child: _nextIconButton
+            )
+          ],
+        )
+      ),
     );
   }
 }
@@ -42,11 +47,12 @@ class LoginFormState extends State<LoginForm> {
 class LoginInput extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
   final Function changePageFunction;
-  LoginInput(this._formKey, this.changePageFunction);
+  final Function setInputErrorFunction;
+  LoginInput(this._formKey, this.changePageFunction, this.setInputErrorFunction);
 
   final RegExp _regExEmail = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   final _errorBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.orange),
+    borderSide: BorderSide(color: Colors.orange, width: 2.5),
     borderRadius: BorderRadius.all(Radius.circular(32)),
   );
 
@@ -54,36 +60,41 @@ class LoginInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textInputAction: TextInputAction.next,
+      
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: "Email...",
-        helperText: "", // To ensure consistent height of widget
+        // helperText: " ", // To ensure consistent height of widget
         contentPadding: EdgeInsets.fromLTRB(24, 16, 64, 16),
-        errorStyle: TextStyle(color: Colors.orange),
+        errorStyle: TextStyle(color: Colors.orange, height: 0, fontSize: 0),
         fillColor: Colors.white,
         filled: true,
         errorBorder: _errorBorder,
         focusedErrorBorder: _errorBorder,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(32)),
+          borderSide: BorderSide.none
         )
        ),
       autofocus: true,
+      
       onFieldSubmitted: (value) {_formKey.currentState.save();},
       onSaved: (value) {
         if (_formKey.currentState.validate()) {
           FocusScope.of(context).unfocus();
           // _formKey.currentState.reset();
-          // Navigator.pushNamed(context, '/login/password');
-          changePageFunction(LoginPageStatus.password);
+          setInputErrorFunction("");
+          changePageFunction(LoginPages.password);
         }
       },
       validator: (value) {
         if (value.isEmpty) {
-          return 'Enter an email';
+          setInputErrorFunction("Enter an email");
+          return '';
         }
         if (!_regExEmail.hasMatch(value)) {
-          return 'Enter a valid email';
+          setInputErrorFunction("Enter a valid email");
+          return '';
         }
         return null;
       }
