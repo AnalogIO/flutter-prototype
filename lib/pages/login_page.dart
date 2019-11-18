@@ -33,11 +33,12 @@ class _LoginPageState extends State<LoginPage> {
   // Password
   String _getInputPassword() => _inputPassword;
   void _updateInputPassword(String number) {
-    setState(() {_inputPassword = _inputPassword + number;} );
+    if (_inputPassword.length < 4) {
+      setState(() {_inputPassword = _inputPassword + number;} );
 
-    // TODO Handle login
-    if (_inputPassword.length >= 4) {
-      _login(_inputEmail, _inputPassword);
+      if (_inputPassword.length == 4) {
+        _login(_inputEmail, _inputPassword);
+      }
     }
   }
   void _resetInputPassword() {
@@ -120,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           loginUpper,
           Text("${_loginPage.toString()} | $_inputEmail | ${_getInputPassword()}"),
-          Numpad(_loginPage, _updateInputPassword)
+          Numpad(_loginPage, _updateInputPassword, _resetInputPassword)
         ]
       ),
     );

@@ -2,11 +2,18 @@ import 'package:analog_app/utils/login_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+enum NumpadActions {
+  add,
+  reset,
+  biometric,
+  forgot
+}
 
 class Numpad extends StatefulWidget {
   final LoginPages _page;
-  final Function _updateInputPassword;
-  const Numpad(this._page, this._updateInputPassword);
+  final Function _updatePassword;
+  final Function _resetPassword;
+  const Numpad(this._page, this._updatePassword, this._resetPassword);
 
   @override
   NumpadState createState() => NumpadState();
@@ -17,11 +24,12 @@ class NumpadState extends State<Numpad> {
 
   @override
   Widget build(BuildContext context) {
-    Widget numpadButton(String text, [bool updatePassword = true]) {
+    Widget numpadButton(String text, [NumpadActions action = NumpadActions.add]) {
       return FlatButton(
         onPressed: () {
           HapticFeedback.lightImpact();
-          if (updatePassword) widget._updateInputPassword(text);
+          if (action == NumpadActions.add) widget._updatePassword(text);
+          if (action == NumpadActions.reset) widget._resetPassword();
         },
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -77,9 +85,9 @@ class NumpadState extends State<Numpad> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                numpadButton("x", false),
+                numpadButton("?", NumpadActions.forgot),
                 numpadButton("0"),
-                numpadButton("x", false),
+                numpadButton("x", NumpadActions.reset),
               ],
             )
           ],
@@ -88,24 +96,3 @@ class NumpadState extends State<Numpad> {
     );
   }
 }
-
-// class numpadButton extends StatelessWidget {
-//   final String _text;
-//   numpadButton(this._text);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FlatButton(
-//       onPressed: () {
-//         HapticFeedback.lightImpact();
-//       },
-//       child: Padding(
-//         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-//         child: Text(
-//           _text,
-//           style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
-//         )
-//       )
-//     );
-//   }
-// }

@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 
-// TODO Misleading name : numpad is the password input..
-class LoginPasswordInput extends StatefulWidget {
+class LoginPasswordInput extends StatelessWidget {
   final Function getPassword;
   const LoginPasswordInput(this.getPassword);
 
   @override
-  LoginPasswordInputState createState() => LoginPasswordInputState();
-}
-
-class LoginPasswordInputState extends State<LoginPasswordInput> {
-  // List<int> _passcode = [];
-  @override
   Widget build(BuildContext context) {
-    String _password = widget.getPassword();
-    int length = _password.length;
+    String _password = getPassword();
+    int passwordLength = _password.length;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        PasswordCircle(1, length),
-        PasswordCircle(2, length),
-        PasswordCircle(3, length),
-        PasswordCircle(4, length)
+        PasswordCircle(1, passwordLength),
+        PasswordCircle(2, passwordLength),
+        PasswordCircle(3, passwordLength),
+        PasswordCircle(4, passwordLength)
       ],
     );
   }
