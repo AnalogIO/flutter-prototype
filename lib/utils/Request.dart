@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import 'dart:convert';
@@ -12,6 +13,8 @@ class Request {
     try {
       var response = await client.get(apiEndpoint + path);
       return response;
+    } catch(error) {
+      debugPrint(error);
     } finally {
      client.close();
     }

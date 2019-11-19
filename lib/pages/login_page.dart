@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../components/login_image.dart';
 import '../components/login_title.dart';
 import '../components/login_input.dart';
@@ -51,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 200) {
       // handle success
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       // handle failure
       Navigator.pushReplacementNamed(context, '/home');
@@ -60,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
   // Other page state
   void _changePage(LoginPages newPage) {
     setState(() {
+      _inputError = "";
       _loginPage = newPage;
     });
   }

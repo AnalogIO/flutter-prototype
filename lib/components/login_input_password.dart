@@ -36,10 +36,10 @@ class PasswordCircle extends StatelessWidget {
     return Container(
       height: 50,
       width: 50,
-      margin: EdgeInsets.symmetric(horizontal: 6),
+      margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: fill,
-        borderRadius: BorderRadius.circular(24)
+        borderRadius: BorderRadius.circular(50)
       )
     );
   }
