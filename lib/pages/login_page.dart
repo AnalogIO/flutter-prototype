@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../components/login_image.dart';
-import '../components/login_title.dart';
-import '../components/login_input.dart';
-import '../components/login_input_password.dart';
-import '../components/login_input_hint.dart';
-import '../components/login_cta.dart';
-import '../components/numpad.dart';
+import '../components/login/login_image.dart';
+import '../components/login/login_title.dart';
+import '../components/login/login_input.dart';
+import '../components/login/login_input_password.dart';
+import '../components/login/login_input_hint.dart';
+import '../components/login/login_cta.dart';
+import '../components/login/login_numpad.dart';
 
 import '../utils/Request.dart';
 import '../utils/login_pages.dart';
+
+// TODO Login loading animation/indicator
+// TODO App state
+// TODO Small animations
+// TODO Fix password circles buttons
 
 class LoginPage extends StatefulWidget {
   // constructor. need?
@@ -42,34 +47,42 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
-  void _resetInputPassword() {
-    setState(() {_inputPassword = "";} );
+  void _resetInputPassword({bool clearError = true}) {
+    setState(() {
+      _inputPassword = "";
+      if (clearError) _inputError = "";
+    });
   }
 
   // Login
   void _login(String email, String password) async {
-    final response = await Request.makeRequest("/API/V1/user", "post", {
+    final response = await Request.makeRequestJson("/API/V1/user", "post", {
       "email": email,
       "password": password
     });
 
-    if (response != null && response.statusCode == 200) {
+    if (response == null) {
+      debugPrint('FAILURE -- RESPONSE NULL');
+      return;
+    }
+
+    if (response["statusCode"] == "200" && response["jsonBody"]["token"] != null) {
       // handle success
-      //Navigator.pushReplacementNamed(context, '/home');
-
-      debugPrint(response.body);
-
+      debugPrint(response.toString());
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       // handle failure
-      // Navigator.pushReplacementNamed(context, '/login');
       debugPrint('FAILURE');
+      debugPrint(response.toString());
+      _setInputError(response["jsonBody"]["message"]);
+      _resetInputPassword(clearError: false);
     }
   }
 
   // Other page state
   void _changePage(LoginPages newPage) {
+    _resetInputPassword();
     setState(() {
-      _inputError = "";
       _loginPage = newPage;
     });
   }
@@ -97,15 +110,11 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
         color: Color(0xff362619),
-        // Rounded bottom corners
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
-        //     color: Color(0xff362619)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             LoginImage(),
-            LoginTitle(_loginPage),
+            LoginTitle(_loginPage, _inputEmail),
             Visibility(
               visible: showEmailInput,
               child: LoginForm(_loginPage, _changePage, _setInputEmail, _setInputError),

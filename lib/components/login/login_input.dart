@@ -3,14 +3,14 @@ import 'package:analog_app/utils/login_pages.dart';
 
 class LoginForm extends StatefulWidget {
   final LoginPages page;
-  final Function changePageFunction;
-  final Function setInputEmailFunction;
-  final Function setInputErrorFunction;
+  final Function changePage;
+  final Function setInputEmail;
+  final Function setInputError;
   const LoginForm(
     this.page,
-    this.changePageFunction,
-    this.setInputEmailFunction,
-    this.setInputErrorFunction
+    this.changePage,
+    this.setInputEmail,
+    this.setInputError
   );
 
   @override
@@ -27,6 +27,7 @@ class LoginFormState extends State<LoginForm> {
       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
       icon: Icon(Icons.arrow_forward),
       onPressed: () {_formKey.currentState.save();},
+      tooltip: "Submit",
     );
   
     return SizedBox(
@@ -39,9 +40,9 @@ class LoginFormState extends State<LoginForm> {
               alignment: Alignment.topCenter,
               child: LoginInput(
                 _formKey,
-                widget.changePageFunction,
-                widget.setInputEmailFunction,
-                widget.setInputErrorFunction
+                widget.changePage,
+                widget.setInputEmail,
+                widget.setInputError
               )
             ),
             Container(
@@ -57,14 +58,14 @@ class LoginFormState extends State<LoginForm> {
 
 class LoginInput extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
-  final Function changePageFunction;
-  final Function setInputEmailFunction;
-  final Function setInputErrorFunction;
+  final Function changePage;
+  final Function setInputEmail;
+  final Function setInputError;
   LoginInput(
     this._formKey,
-    this.changePageFunction,
-    this.setInputEmailFunction,
-    this.setInputErrorFunction
+    this.changePage,
+    this.setInputEmail,
+    this.setInputError
   );
 
   final RegExp _regExEmail = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -99,18 +100,17 @@ class LoginInput extends StatelessWidget {
         // Handle email input
         if (_formKey.currentState.validate()) {
           FocusScope.of(context).unfocus();
-          setInputEmailFunction(value);
-          setInputErrorFunction("");
-          changePageFunction(LoginPages.password);
+          setInputEmail(value);
+          changePage(LoginPages.password);
         }
       },
       validator: (value) {
         if (value.isEmpty) {
-          setInputErrorFunction("Enter an email");
+          setInputError("Enter an email\n");
           return '';
         }
         if (!_regExEmail.hasMatch(value)) {
-          setInputErrorFunction("Enter a valid email");
+          setInputError("Enter a valid email\n");
           return '';
         }
         return null;

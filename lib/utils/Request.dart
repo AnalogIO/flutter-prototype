@@ -22,7 +22,7 @@ class Request {
     return response;
   }
 
-  static Future<dynamic> makeRequestJson(String path, String method, String body) async {
+  static Future<dynamic> makeRequestJson(String path, String method, Object body) async {
     Response response = await makeRequest(path, method, body);
 
     return {
