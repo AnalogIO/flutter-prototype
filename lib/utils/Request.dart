@@ -14,7 +14,9 @@ class Request {
     if (method == "get") {
       response = await client.get(apiEndpoint + path);
     } else if (method == "post") {
-      response = await client.post(apiEndpoint + path, body: body);
+      response = await client.post(apiEndpoint + path, body: body, headers: {
+        "Content-Type": "application/json"
+      });
     }
 
     client.close();
