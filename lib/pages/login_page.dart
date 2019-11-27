@@ -48,11 +48,17 @@ class _LoginPageState extends State<LoginPage> {
 
   // Login
   void _login(String email, String password) async {
-    final response = await Request.makeRequest("/test");
+    final response = await Request.makeRequest("/API/V1/user", "post", {
+      "email": email,
+      "password": password
+    });
 
     if (response != null && response.statusCode == 200) {
       // handle success
-      Navigator.pushReplacementNamed(context, '/home');
+      //Navigator.pushReplacementNamed(context, '/home');
+
+      debugPrint(response.body);
+
     } else {
       // handle failure
       // Navigator.pushReplacementNamed(context, '/login');

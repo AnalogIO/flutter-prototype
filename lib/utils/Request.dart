@@ -3,25 +3,26 @@ import 'package:http/http.dart';
 
 import 'dart:convert';
 
-
 class Request {
 
-  static final String apiEndpoint = "http://ip.jsontest.com";
+  static final String apiEndpoint = "https://analog-app.herokuapp.com/";
 
-  static Future<Response> makeRequest(String path) async {
-    var client = new Client();
-    try {
-      var response = await client.get(apiEndpoint + path);
-      return response;
-    } catch(error) {
-      debugPrint(error.toString());
-    } finally {
-     client.close();
+  static Future<Response> makeRequest(String path, String method, Object body) async {
+      Client client = new Client();
+      Response response;
+
+    if (method == "get") {
+      response = await client.get(apiEndpoint + path);
+    } else if (method == "post") {
+      response = await client.post(apiEndpoint + path, body: body);
     }
+
+    client.close();
+    return response;
   }
 
-  static Future<dynamic> makeRequestJson(String path) async {
-    Response response = await makeRequest(path);
+  static Future<dynamic> makeRequestJson(String path, String method, String body) async {
+    Response response = await makeRequest(path, method, body);
 
     return {
       "statusCode": response.statusCode.toString(),
