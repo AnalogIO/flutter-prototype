@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class Request {
 
-  static final String apiEndpoint = "https://analog-app.herokuapp.com/";
+  static final String apiEndpoint = "https://analog-app.herokuapp.com";
 
   static Future<Response> makeRequest(String path, String method, Object body) async {
       Client client = new Client();
