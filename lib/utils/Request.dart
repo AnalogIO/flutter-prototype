@@ -14,7 +14,7 @@ class Request {
       var response = await client.get(apiEndpoint + path);
       return response;
     } catch(error) {
-      debugPrint(error);
+      debugPrint(error.toString());
     } finally {
      client.close();
     }

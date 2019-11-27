@@ -50,12 +50,13 @@ class _LoginPageState extends State<LoginPage> {
   void _login(String email, String password) async {
     final response = await Request.makeRequest("/test");
 
-    if (response.statusCode == 200) {
+    if (response != null && response.statusCode == 200) {
       // handle success
       Navigator.pushReplacementNamed(context, '/home');
     } else {
       // handle failure
-      Navigator.pushReplacementNamed(context, '/home');
+      // Navigator.pushReplacementNamed(context, '/login');
+      debugPrint('FAILURE');
     }
   }
 
