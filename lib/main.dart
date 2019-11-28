@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
 
-// import 'utils/login_pages.dart';
-
 const OWNED_TICKETS = [{'espresso': 2}];
 const ALL_TICKETS = {
   'filter' : {
