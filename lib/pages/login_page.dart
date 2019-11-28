@@ -9,7 +9,7 @@ import '../components/login/login_cta.dart';
 import '../components/login/login_numpad.dart';
 
 import '../utils/Request.dart';
-import '../utils/login_pages.dart';
+import '../utils/enums.dart';
 
 // TODO Login loading animation/indicator
 // TODO App state

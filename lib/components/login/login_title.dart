@@ -1,4 +1,4 @@
-import 'package:analog_app/utils/login_pages.dart';
+import 'package:analog_app/utils/enums.dart';
 import 'package:flutter/material.dart';
 
 class LoginTitle extends StatelessWidget {

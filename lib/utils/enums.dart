@@ -4,3 +4,9 @@ enum LoginPages {
   registerEmail,
   registerPassword
 }
+
+enum LoginSaved {
+  none,
+  emailOnly,
+  all
+}

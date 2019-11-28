@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:analog_app/utils/login_pages.dart';
+import 'package:analog_app/utils/enums.dart';
 
 class LoginInputHint extends StatefulWidget {
   final LoginPages _page;
