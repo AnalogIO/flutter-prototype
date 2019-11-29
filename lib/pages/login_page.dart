@@ -12,7 +12,6 @@ import '../utils/Request.dart';
 import '../utils/enums.dart';
 
 // TODO Login loading animation/indicator
-// TODO Fix password circles buttons
 // TODO Small animations
 // TODO LoginPage class Stateless?
 

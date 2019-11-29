@@ -5,6 +5,9 @@ import 'package:analog_app/utils/login_state.dart';
 
 import 'package:flutter/services.dart'; // Haptic feedback
 
+// TODO grid lines in numpad
+// TODO numpad optimization + support for icons
+
 enum NumpadActions {
   add,
   reset,
@@ -12,12 +15,7 @@ enum NumpadActions {
   forgot
 }
 
-class Numpad extends StatefulWidget {
-  @override
-  NumpadState createState() => NumpadState();
-}
-
-class NumpadState extends State<Numpad> {
+class Numpad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginState>(
