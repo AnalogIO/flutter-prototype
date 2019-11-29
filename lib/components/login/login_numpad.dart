@@ -1,5 +1,7 @@
-import 'package:analog_app/utils/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:analog_app/utils/login_state.dart';
+
 import 'package:flutter/services.dart';
 
 enum NumpadActions {
@@ -10,89 +12,95 @@ enum NumpadActions {
 }
 
 class Numpad extends StatefulWidget {
-  final LoginPages _page;
-  final Function _updatePassword;
-  final Function _resetPassword;
-  const Numpad(this._page, this._updatePassword, this._resetPassword);
-
   @override
   NumpadState createState() => NumpadState();
 }
 
 class NumpadState extends State<Numpad> {
-  // bool _fingerprintButton = true;
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<LoginState>(
+      builder: (context, state, child) {
+        return Container(
+          color: (state.isPageEmail)
+            ? Colors.transparent
+            : Color(0xff362619),
+          padding: EdgeInsets.only(top: 12, bottom: 24),
+          child: Visibility(
+            visible: !state.isPageEmail,
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    NumpadButton("1"),
+                    NumpadButton("2"),
+                    NumpadButton("3"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    NumpadButton("4"),
+                    NumpadButton("5"),
+                    NumpadButton("6"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    NumpadButton("7"),
+                    NumpadButton("8"),
+                    NumpadButton("9"),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    NumpadButton("?", NumpadActions.forgot),
+                    NumpadButton("0"),
+                    NumpadButton("x", NumpadActions.reset),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+}
+
+class NumpadButton extends StatelessWidget {
+  final String text;
+  final NumpadActions action;
+  NumpadButton(
+    this.text,
+    [this.action = NumpadActions.add]
+  );
 
   @override
   Widget build(BuildContext context) {
-    Widget numpadButton(String text, [NumpadActions action = NumpadActions.add]) {
-      return FlatButton(
-        onPressed: () {
-          HapticFeedback.lightImpact();
-          if (action == NumpadActions.add) widget._updatePassword(text);
-          if (action == NumpadActions.reset) widget._resetPassword();
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
-          )
-        )
-      );
-    }
-
-    bool showNumpad = true;
-    if (widget._page == LoginPages.email) showNumpad = false;
-    if (widget._page == LoginPages.registerEmail) showNumpad = false;
-    
-    Color numpadBackground = Colors.transparent;
-    if (!showNumpad) numpadBackground = Color(0xff362619);
-
-    return Container(
-      color: numpadBackground,
-      padding: EdgeInsets.only(top: 12, bottom: 24),
-      child: Visibility(
-        visible: showNumpad,
-        maintainSize: true,
-        maintainAnimation: true,
-        maintainState: true,
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                numpadButton("1"),
-                numpadButton("2"),
-                numpadButton("3"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                numpadButton("4"),
-                numpadButton("5"),
-                numpadButton("6"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                numpadButton("7"),
-                numpadButton("8"),
-                numpadButton("9"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                numpadButton("?", NumpadActions.forgot),
-                numpadButton("0"),
-                numpadButton("x", NumpadActions.reset),
-              ],
+    return Consumer<LoginState>(
+      builder: (context, state, child) {
+        return FlatButton(
+          onPressed: () {
+            HapticFeedback.lightImpact();
+            if (action == NumpadActions.add) state.password += text;
+            if (action == NumpadActions.reset) state.password = "";
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
             )
-          ],
-        ),
-      ),
+          )
+        );
+      }
     );
   }
 }
