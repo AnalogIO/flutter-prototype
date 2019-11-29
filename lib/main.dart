@@ -1,4 +1,6 @@
+import 'package:analog_app/utils/login_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pages/login_page.dart';
 
 const OWNED_TICKETS = [{'espresso': 2}];
@@ -25,16 +27,21 @@ const ALL_TICKETS = {
   }
 };
 
-void main() => runApp(App());
+void main() => runApp(
+  MultiProvider(
+    child: App(),
+    providers: [
+      ChangeNotifierProvider(create: (context) => LoginState())
+    ]
+  )
+);
 
 /// This Widget is the main application widget.
 class App extends StatelessWidget {
-  static const String _title = 'Café Analog';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: 'Café Analog',
       theme: ThemeData(
         primaryColor: Color(0xff362619),
         primaryColorBrightness: Brightness.dark,

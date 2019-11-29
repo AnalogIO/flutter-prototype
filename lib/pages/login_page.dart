@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
               replacement: LoginPasswordInput(_getInputPassword),
             ),
             LoginInputHint(_loginPage, _inputError),
-            LoginCTA(_loginPage, _changePage)
+            LoginCTA()
           ],
         )
       )
