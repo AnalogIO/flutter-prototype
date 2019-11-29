@@ -30,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         elevation: 0,
         actions: <Widget>[
-          IconButton(icon: Icon(
-            Icons.help_outline),
+          IconButton(
+            icon: Icon(Icons.help_outline),
             onPressed: (){} // TODO Add debug helper function
           )
         ]
