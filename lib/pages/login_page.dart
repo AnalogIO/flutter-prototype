@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:analog_app/utils/colors.dart';
 
 import '../components/login/login_image.dart';
 import '../components/login/login_title.dart';
@@ -12,7 +13,6 @@ import '../utils/enums.dart';
 
 // TODO Login loading animation/indicator
 // TODO Fix password circles buttons
-// TODO Global color vars
 // TODO Small animations
 // TODO LoginPage class Stateless?
 
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         ]
       ),
       body: Container(
-        color: Color(0xff362619),
+        color: AppColors.coffee,
         child: Column(
           children: <Widget>[
             LoginUpper(),
@@ -55,7 +55,7 @@ class LoginUpper extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
-        color: Color(0xff362619),
+        color: AppColors.coffee,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

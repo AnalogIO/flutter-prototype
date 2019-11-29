@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
 
 class LoginInputHint extends StatefulWidget {
@@ -13,15 +14,16 @@ class _LoginInputHintState extends State<LoginInputHint> {
     return Consumer<LoginState>(
       builder: (context, state, child) {
         return Padding(
-          padding: EdgeInsets.symmetric(vertical: 12),
+          padding: EdgeInsets.only(top: 16, bottom: 12),
           child: Text(
-            (state.errorText.isEmpty
+            (state.errorText.isEmpty)
               ? state.hintText
-              : state.errorText
-            ),
+              : state.errorText,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: (state.errorText.isEmpty ? Colors.white : Colors.orange),
+              color: (state.errorText.isEmpty)
+                ? AppColors.white
+                : AppColors.orange,
               fontSize: 14
             ),
           ),

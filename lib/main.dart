@@ -1,6 +1,8 @@
-import 'package:analog_app/utils/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:analog_app/utils/colors.dart';
+import 'package:analog_app/utils/login_state.dart';
+
 import 'pages/login_page.dart';
 
 const OWNED_TICKETS = [{'espresso': 2}];
@@ -43,13 +45,13 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Café Analog',
       theme: ThemeData(
-        primaryColor: Color(0xff362619),
+        primaryColor: AppColors.coffee,
         primaryColorBrightness: Brightness.dark,
-        primaryTextTheme: TextTheme(title: TextStyle(color: Color(0xffFAFAFA))),
-        primaryIconTheme: IconThemeData(color: Color(0xffE5E2D7)),
-        canvasColor: Color(0xffE5E2D7),
+        primaryTextTheme: TextTheme(title: TextStyle(color: AppColors.white)),
+        primaryIconTheme: IconThemeData(color: AppColors.cream),
+        canvasColor: AppColors.cream,
       ),
-      color: Colors.black,
+      color: AppColors.coffee,
       home: LoginPage(),
       routes: <String, WidgetBuilder> {
         '/login': (BuildContext context) => LoginPage(),
@@ -135,9 +137,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        backgroundColor: Color(0xff362619),
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Color(0xffE5E2D7),
+        backgroundColor: AppColors.coffee,
+        selectedItemColor: AppColors.orange,
+        unselectedItemColor: AppColors.cream,
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
 
 import 'package:flutter/services.dart'; // Haptic feedback
@@ -23,8 +24,8 @@ class NumpadState extends State<Numpad> {
       builder: (context, state, child) {
         return Container(
           color: (state.isPageEmail)
-            ? Color(0xff362619)
-            : Color(0xffE5E2D7),
+            ? AppColors.coffee
+            : AppColors.cream,
           padding: EdgeInsets.only(top: 12, bottom: 24),
           child: Visibility(
             visible: !state.isPageEmail,
@@ -89,8 +90,12 @@ class NumpadButton extends StatelessWidget {
         return FlatButton(
           onPressed: () {
             HapticFeedback.lightImpact();
-            if (action == NumpadActions.add) state.password += text;
             if (action == NumpadActions.reset) state.password = "";
+            if (action == NumpadActions.add) {
+              state.password += text;
+              // TODO Handle login success
+              if (state.token.isNotEmpty) Navigator.pushReplacementNamed(context, "/home");
+            }
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),

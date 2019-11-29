@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
 
 class LoginCTA extends StatelessWidget {
@@ -12,7 +13,7 @@ class LoginCTA extends StatelessWidget {
           child: Text(
             state.ctaText,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.white,
               fontSize: 12,
               fontWeight: FontWeight.normal,
               decoration: TextDecoration.underline

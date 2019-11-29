@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
 
 class LoginTitle extends StatelessWidget {
@@ -15,7 +16,7 @@ class LoginTitle extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.white,
             fontSize: 24,
             fontWeight: FontWeight.bold
           ),
