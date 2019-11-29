@@ -11,7 +11,7 @@ import '../utils/Request.dart';
 import '../utils/enums.dart';
 
 // TODO Login loading animation/indicator
-// TODO App state
+// TODO Global color vars
 // TODO Small animations
 // TODO Fix password circles buttons
 
@@ -35,11 +35,14 @@ class _LoginPageState extends State<LoginPage> {
           )
         ]
       ),
-      body: Column(
-        children: <Widget>[
-          LoginUpper(),
-          Numpad()
-        ]
+      body: Container(
+        color: Color(0xff362619),
+        child: Column(
+          children: <Widget>[
+            LoginUpper(),
+            Numpad()
+          ]
+        ),
       ),
     );
   }

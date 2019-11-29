@@ -14,24 +14,6 @@ class LoginInputHint extends StatefulWidget {
 class _LoginInputHintState extends State<LoginInputHint> {
   @override
   Widget build(BuildContext context) {
-    // String text = "\n";
-    // bool isError = false;
-
-    // if (widget._page == LoginPages.password || widget._page == LoginPages.registerPassword) {
-    //   if (widget._errorMessage.isEmpty) {
-    //     text = "Enter passcode\n";
-    //   } else {
-    //     text = widget._errorMessage;
-    //     isError = true;
-    //   }
-    // }
-
-    // if (widget._page == LoginPages.email && widget._errorMessage.isNotEmpty) {
-    //   text = widget._errorMessage;
-    //   isError = true;
-    // }
-
-    // Color textColor = isError ? Colors.orange : Colors.white;
     return Consumer<LoginState>(
       builder: (context, state, child) {
         return Padding(
@@ -40,7 +22,7 @@ class _LoginInputHintState extends State<LoginInputHint> {
             (state.errorText.isNotEmpty ? state.errorText : state.hintText),
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: (state.errorText.isNotEmpty ? Colors.white : Colors.orange),
+              color: (state.errorText.isEmpty ? Colors.white : Colors.orange),
               fontSize: 14
             ),
           ),

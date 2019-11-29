@@ -8,5 +8,5 @@ enum LoginPages {
 enum LoginSaved {
   none,
   emailOnly,
-  all
+  all // biometric login
 }

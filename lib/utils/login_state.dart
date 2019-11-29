@@ -15,8 +15,10 @@ class LoginState extends ChangeNotifier {
   String get token => _token;
   String get username => _username;
   String get errorText => _errorText;
+  
   LoginPages get page => _loginPage;
   bool get isPageEmail => _loginPage == LoginPages.email || _loginPage == LoginPages.registerEmail;
+
   LoginSaved get loginSaved => _loginSaved;
 
   set email(String newEmail) {

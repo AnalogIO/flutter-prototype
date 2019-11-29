@@ -23,8 +23,8 @@ class NumpadState extends State<Numpad> {
       builder: (context, state, child) {
         return Container(
           color: (state.isPageEmail)
-            ? Colors.transparent
-            : Color(0xff362619),
+            ? Color(0xff362619)
+            : Color(0xffE5E2D7),
           padding: EdgeInsets.only(top: 12, bottom: 24),
           child: Visibility(
             visible: !state.isPageEmail,
