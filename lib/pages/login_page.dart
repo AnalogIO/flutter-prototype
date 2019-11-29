@@ -11,9 +11,10 @@ import '../utils/Request.dart';
 import '../utils/enums.dart';
 
 // TODO Login loading animation/indicator
+// TODO Fix password circles buttons
 // TODO Global color vars
 // TODO Small animations
-// TODO Fix password circles buttons
+// TODO LoginPage class Stateless?
 
 class LoginPage extends StatefulWidget {
   @override

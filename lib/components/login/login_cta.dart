@@ -6,11 +6,11 @@ class LoginCTA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginState>(
-      builder: (context, loginState, child) {
+      builder: (context, state, child) {
         return FlatButton(
-          onPressed: () => loginState.ctaChangePageFunction(),
+          onPressed: () => state.ctaChangePageFunction(),
           child: Text(
-            loginState.ctaText,
+            state.ctaText,
             style: TextStyle(
               color: Colors.white,
               fontSize: 12,

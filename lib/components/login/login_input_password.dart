@@ -6,14 +6,14 @@ class LoginInputPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginState>(
-      builder: (context, loginState, child) {
+      builder: (context, state, child) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            PasswordCircle(1, loginState.password.length),
-            PasswordCircle(2, loginState.password.length),
-            PasswordCircle(3, loginState.password.length),
-            PasswordCircle(4, loginState.password.length)
+            PasswordCircle(1, state.password.length),
+            PasswordCircle(2, state.password.length),
+            PasswordCircle(3, state.password.length),
+            PasswordCircle(4, state.password.length)
           ],
         );
       }
@@ -30,10 +30,17 @@ class PasswordCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     bool current = _circleIndex == _passwordLength + 1;
     bool filled  = _circleIndex <= _passwordLength;
+    Color fill;
 
-    Color fill = Color(0xffFAFAFA);
-    if (filled) fill = Colors.orange;
-    if (current) fill = Colors.blue;
+    if (filled) {
+      fill = Colors.orange;
+    }
+    else if (current) {
+      fill = Colors.blue;
+    }
+    else {
+      fill = Color(0xffFAFAFA);
+    }
 
     return Container(
       height: 50,

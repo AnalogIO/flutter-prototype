@@ -6,11 +6,11 @@ class LoginTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {    
     return Consumer<LoginState>(
-      builder: (context, loginState, child) {
+      builder: (context, state, child) {
         return Padding(
         padding: EdgeInsets.only(top: 32, bottom: 16),
         child: Text(
-          loginState.titleText,
+          state.titleText,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
