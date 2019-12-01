@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:analog_app/utils/colors.dart';
 
-// TODO Fix all constructors (include Key)
-
 class TicketDots extends StatelessWidget {
   final int amountOwned;
-
-  const TicketDots({
-    Key key,
-    this.amountOwned
-  }) : super(key: key);
+  const TicketDots({this.amountOwned});
 
   @override
   Widget build(BuildContext context) {

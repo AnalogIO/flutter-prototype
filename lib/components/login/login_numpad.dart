@@ -59,9 +59,9 @@ class Numpad extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    NumpadButton("?", NumpadActions.forgot),
+                    NumpadButton("?", action: NumpadActions.forgot),
                     NumpadButton("0"),
-                    NumpadButton("x", NumpadActions.reset),
+                    NumpadButton("x", action: NumpadActions.reset),
                   ],
                 )
               ],
@@ -78,7 +78,7 @@ class NumpadButton extends StatelessWidget {
   final NumpadActions action;
   NumpadButton(
     this.text,
-    [this.action = NumpadActions.add]
+    {this.action = NumpadActions.add}
   );
 
   @override

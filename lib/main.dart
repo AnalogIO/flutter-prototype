@@ -1,4 +1,3 @@
-import 'package:analog_app/components/tickets/ticket_dots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +21,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      // DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp
     ]);
 
     return MaterialApp(
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage> {
     'About'
   ];
   static final List<Widget> _widgetOptions = <Widget>[
-    PageTickets(),
+    TicketsPage(),
     PageReceipts(),
     PageStats(),
     PageSettings(),
@@ -133,20 +131,12 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class PageTickets extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // return Text(
-    //   'Tickets'
-    // );
-    return TicketsPage();
-  }
-}
-
 class PageReceipts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TicketDots(amountOwned: 3);
+    return Text(
+      'Reciepts'
+    );
   }
 }
 

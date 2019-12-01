@@ -6,12 +6,11 @@ class Ticket extends StatefulWidget {
   final String title;
   final String desc;
   final int ownedAmount;
-  
-  Ticket(
+  Ticket({
     this.title,
     this.desc,
     this.ownedAmount
-  );
+  });
 
   @override
   _TicketState createState() => _TicketState();
@@ -49,7 +48,10 @@ class _TicketState extends State<Ticket> {
             ),
           ),
           Expanded(child: Container()), // Pushes TicketFooter to bottom
-          TicketFooter(owned, widget.ownedAmount)
+          TicketFooter(
+            owned: owned,
+            ownedAmount: widget.ownedAmount
+          )
         ],
       ),
       margin: EdgeInsets.only(bottom: 20),
@@ -75,10 +77,10 @@ class _TicketState extends State<Ticket> {
 class TicketFooter extends StatelessWidget {
   final bool owned;
   final int ownedAmount;
-  TicketFooter(
+  TicketFooter({
     this.owned,
     this.ownedAmount
-  );
+  });
 
   @override
   Widget build(BuildContext context) {

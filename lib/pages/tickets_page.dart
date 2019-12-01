@@ -35,28 +35,28 @@ class TicketsPage extends StatelessWidget {
       children: <Widget>[
         SectionTitle("My tickets"),
         Ticket(
-          ALL_TICKETS['espresso']['name'],
-          ALL_TICKETS['espresso']['desc'],
-          OWNED_TICKETS[0]['espresso']
+          title: ALL_TICKETS['espresso']['name'],
+          desc: ALL_TICKETS['espresso']['desc'],
+          ownedAmount: OWNED_TICKETS[0]['espresso']
         ),
         Ticket(
-          ALL_TICKETS['tea']['name'],
-          ALL_TICKETS['tea']['desc'],
-          17
+          title: ALL_TICKETS['tea']['name'],
+          desc: ALL_TICKETS['tea']['desc'],
+          ownedAmount: 17
         ),
         SectionTitle(
           "Buy Tickets",
           SectionTitleSideButton()
         ),
         Ticket(
-          ALL_TICKETS['filter']['name'],
-          ALL_TICKETS['filter']['desc'],
-          0
+          title: ALL_TICKETS['filter']['name'],
+          desc: ALL_TICKETS['filter']['desc'],
+          ownedAmount: 0
         ),
         Ticket(
-          ALL_TICKETS['syrup']['name'],
-          ALL_TICKETS['syrup']['desc'],
-          0
+          title: ALL_TICKETS['syrup']['name'],
+          desc: ALL_TICKETS['syrup']['desc'],
+          ownedAmount: 0
         )
       ],
     );
