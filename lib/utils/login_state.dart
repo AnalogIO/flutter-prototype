@@ -35,7 +35,6 @@ class LoginState extends ChangeNotifier {
     if (_password.length == 4) {
       if (_loginPage == LoginPages.password) logIn();
       else register();
-
       _password = "";
     }
     notifyListeners();

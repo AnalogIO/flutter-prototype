@@ -8,9 +8,6 @@ import '../components/login/login_input_hint.dart';
 import '../components/login/login_cta.dart';
 import '../components/login/login_numpad.dart';
 
-import '../utils/Request.dart';
-import '../utils/enums.dart';
-
 // TODO Login loading animation/indicator
 // TODO Small animations
 // TODO LoginPage class Stateless?
@@ -31,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.help_outline),
-            onPressed: (){} // TODO Add debug helper function
+            onPressed: () => Navigator.pushReplacementNamed(context, "/home")
           )
         ]
       ),

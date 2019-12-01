@@ -91,7 +91,7 @@ class NumpadButton extends StatelessWidget {
             if (action == NumpadActions.reset) state.password = "";
             if (action == NumpadActions.add) {
               state.password += text;
-              // TODO Handle login success
+              // TODO Handle login success /maybe make state.isLoggedIn?
               if (state.token.isNotEmpty) Navigator.pushReplacementNamed(context, "/home");
             }
           },

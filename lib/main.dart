@@ -1,33 +1,12 @@
+import 'package:analog_app/components/tickets/ticket_dots.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
 
 import 'pages/login_page.dart';
-
-const OWNED_TICKETS = [{'espresso': 2}];
-const ALL_TICKETS = {
-  'filter' : {
-    'name': 'Filter Coffee',
-    'desc': 'Used for filter coffee brewed with fresh ground coffee',
-    'price': 80
-  },
-  'espresso': {
-    'name': 'Espresso Based',
-    'desc': 'Used for specialities like espresso, cappuccino, caffe latte, cortado, americano and chai latte.',
-    'price': 150
-  },
-  'tea' : {
-    'name': 'Tea',
-    'desc': 'Used for our large collection of organic tea',
-    'price': 50
-  },
-  'syrup' : {
-    'name': 'Syrup',
-    'desc': 'Used for syrup',
-    'price': 10
-  }
-};
+import 'pages/tickets_page.dart';
 
 void main() => runApp(
   MultiProvider(
@@ -42,9 +21,15 @@ void main() => runApp(
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: 'Café Analog',
       theme: ThemeData(
+        primarySwatch: Colors.brown,
         primaryColor: AppColors.coffee,
         primaryColorBrightness: Brightness.dark,
         primaryTextTheme: TextTheme(title: TextStyle(color: AppColors.white)),
@@ -117,23 +102,23 @@ class _HomePageState extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Tickets'),
+            title: Text('Tickets', style: TextStyle(fontWeight: FontWeight.w500)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.receipt),
-            title: Text('Receipts'),
+            title: Text('Receipts', style: TextStyle(fontWeight: FontWeight.w500)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.show_chart),
-            title: Text('Stats'),
+            title: Text('Stats', style: TextStyle(fontWeight: FontWeight.w500)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            title: Text('Settings'),
+            title: Text('Settings', style: TextStyle(fontWeight: FontWeight.w500)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store),
-            title: Text('About'),
+            title: Text('About', style: TextStyle(fontWeight: FontWeight.w500)),
           ),
         ],
         currentIndex: _selectedIndex,
@@ -141,6 +126,7 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: AppColors.orange,
         unselectedItemColor: AppColors.cream,
         type: BottomNavigationBarType.fixed,
+        selectedFontSize: 12,
         onTap: _onItemTapped,
       ),
     );
@@ -153,16 +139,14 @@ class PageTickets extends StatelessWidget {
     // return Text(
     //   'Tickets'
     // );
-    return TicketCard();
+    return TicketsPage();
   }
 }
 
 class PageReceipts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Receipts'
-    );
+    return TicketDots();
   }
 }
 
