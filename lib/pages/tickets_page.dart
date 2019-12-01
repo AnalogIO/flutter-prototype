@@ -42,7 +42,7 @@ class TicketsPage extends StatelessWidget {
         Ticket(
           ALL_TICKETS['tea']['name'],
           ALL_TICKETS['tea']['desc'],
-          7
+          17
         ),
         SectionTitle(
           "Buy Tickets",

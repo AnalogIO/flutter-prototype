@@ -1,6 +1,6 @@
-import 'package:analog_app/components/tickets/ticket_dots.dart';
 import 'package:flutter/material.dart';
 import 'package:analog_app/utils/colors.dart';
+import 'package:analog_app/components/tickets/ticket_dots.dart';
 
 class Ticket extends StatefulWidget {
   final String title;
@@ -39,6 +39,8 @@ class _TicketState extends State<Ticket> {
             padding: EdgeInsets.only(top: 8, right: 40),
             child: Text(
               widget.desc,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: AppColors.coffeeLighter,
                 fontSize: 14,
@@ -46,12 +48,12 @@ class _TicketState extends State<Ticket> {
               ),
             ),
           ),
-          Expanded(child: Container()),
+          Expanded(child: Container()), // Pushes TicketFooter to bottom
           TicketFooter(owned, widget.ownedAmount)
         ],
       ),
       margin: EdgeInsets.only(bottom: 20),
-      padding: EdgeInsets.fromLTRB(24, 24, 24, 18),
+      padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
       decoration: BoxDecoration(
         color: (owned)
           ? AppColors.creamDarker
@@ -85,6 +87,7 @@ class TicketFooter extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Container(
+          padding: EdgeInsets.only(bottom: 8),
           child: (owned)
             ? TicketDots(amountOwned: ownedAmount)
             : null
