@@ -1,3 +1,4 @@
+import 'package:analog_app/components/tappable.dart';
 import 'package:flutter/material.dart';
 import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/components/tickets/ticket_dots.dart';
@@ -22,54 +23,57 @@ class _TicketState extends State<Ticket> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            widget.title,
-            style: TextStyle(
-              color: AppColors.coffee,
-              fontSize: 26,
-              fontWeight: FontWeight.bold
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, right: 40),
-            child: Text(
-              widget.description,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: AppColors.coffeeLighter,
-                fontSize: 14,
-                fontWeight: FontWeight.w500
-              ),
-            ),
-          ),
-          Expanded(child: Container()), // Pushes TicketFooter to bottom
-          TicketFooter(
-            owned: owned,
-            ownedAmount: widget.ownedAmount
-          )
-        ],
-      ),
       margin: EdgeInsets.only(bottom: 20),
-      padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
-      decoration: BoxDecoration(
+      child: Tappable(
+        onTap: () => null,
+        borderRadius: BorderRadius.circular(24),
         color: (owned)
           ? AppColors.creamDarker
           : AppColors.white,
-        borderRadius: BorderRadius.circular(24),
         boxShadow: [BoxShadow(
           color: (owned)
-          ? AppColors.coffeeLighter
-          : Color.fromRGBO(0, 0, 0, 0.15),
+            ? AppColors.coffeeLighter
+            : Color.fromRGBO(0, 0, 0, 0.15),
           offset: Offset(0, 3),
           blurRadius: 0,
           spreadRadius: 0,
-        )]
-      )
+        )],
+        child: Container(
+          height: 190,
+          padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                widget.title,
+                style: TextStyle(
+                  color: AppColors.coffee,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8, right: 40),
+                child: Text(
+                  widget.description,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: AppColors.coffeeLighter,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+              ),
+              Expanded(child: Container()), // Pushes TicketFooter to bottom
+              TicketFooter(
+                owned: owned,
+                ownedAmount: widget.ownedAmount
+              )
+            ]
+          )
+        ),
+      ),
     );
   }
 }

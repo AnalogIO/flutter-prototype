@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:analog_app/components/tickets/ticket.dart';
 import 'package:analog_app/components/section_title.dart';
 
-const OWNED_TICKETS = [{'espresso': 2}];
+const OWNED_TICKETS = [{'espresso': 12}];
 const ALL_TICKETS = {
   'filter' : {
     'name': 'Filter Coffee',
@@ -42,7 +42,7 @@ class TicketsPage extends StatelessWidget {
         Ticket(
           title: ALL_TICKETS['tea']['name'],
           description: ALL_TICKETS['tea']['desc'],
-          ownedAmount: 17
+          ownedAmount: 7
         ),
         SectionTitle(
           "Buy Tickets",

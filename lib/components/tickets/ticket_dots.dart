@@ -13,6 +13,7 @@ class TicketDots extends StatelessWidget {
         Container(
           width: 86,
           height: 30,
+          margin: EdgeInsets.only(bottom: 1),
           child: Wrap(
             verticalDirection: VerticalDirection.up,
             spacing: 4,
