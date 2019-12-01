@@ -86,7 +86,7 @@ class TicketFooter extends StatelessWidget {
       children: <Widget>[
         Container(
           child: (owned)
-            ? Text("dots here")//TicketDots()
+            ? TicketDots(amountOwned: ownedAmount)
             : null
         ),
         TicketFooterText(owned, ownedAmount)

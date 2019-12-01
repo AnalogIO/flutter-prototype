@@ -146,7 +146,7 @@ class PageTickets extends StatelessWidget {
 class PageReceipts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TicketDots();
+    return TicketDots(amountOwned: 3);
   }
 }
 
