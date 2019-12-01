@@ -36,12 +36,12 @@ class TicketsPage extends StatelessWidget {
         SectionTitle("My tickets"),
         Ticket(
           title: ALL_TICKETS['espresso']['name'],
-          desc: ALL_TICKETS['espresso']['desc'],
+          description: ALL_TICKETS['espresso']['desc'],
           ownedAmount: OWNED_TICKETS[0]['espresso']
         ),
         Ticket(
           title: ALL_TICKETS['tea']['name'],
-          desc: ALL_TICKETS['tea']['desc'],
+          description: ALL_TICKETS['tea']['desc'],
           ownedAmount: 17
         ),
         SectionTitle(
@@ -50,12 +50,12 @@ class TicketsPage extends StatelessWidget {
         ),
         Ticket(
           title: ALL_TICKETS['filter']['name'],
-          desc: ALL_TICKETS['filter']['desc'],
+          description: ALL_TICKETS['filter']['desc'],
           ownedAmount: 0
         ),
         Ticket(
           title: ALL_TICKETS['syrup']['name'],
-          desc: ALL_TICKETS['syrup']['desc'],
+          description: ALL_TICKETS['syrup']['desc'],
           ownedAmount: 0
         )
       ],

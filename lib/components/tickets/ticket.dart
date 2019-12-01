@@ -4,11 +4,11 @@ import 'package:analog_app/components/tickets/ticket_dots.dart';
 
 class Ticket extends StatefulWidget {
   final String title;
-  final String desc;
+  final String description;
   final int ownedAmount;
   Ticket({
     this.title,
-    this.desc,
+    this.description,
     this.ownedAmount
   });
 
@@ -37,7 +37,7 @@ class _TicketState extends State<Ticket> {
           Padding(
             padding: EdgeInsets.only(top: 8, right: 40),
             child: Text(
-              widget.desc,
+              widget.description,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
