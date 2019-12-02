@@ -103,14 +103,10 @@ class NumpadButton extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Container(
-              width: 32,
-              alignment: Alignment.center,
-              child: (icon != null)
-                ? Icon(icon, size: 32)
-                : Text(text, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
-                )
-            )
+            child: (icon != null)
+              ? Icon(icon, size: 32)
+              : Text(text, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
+              )
           )
         );
       }
