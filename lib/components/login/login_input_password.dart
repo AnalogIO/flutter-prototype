@@ -39,7 +39,7 @@ class PasswordCircle extends StatelessWidget {
     bool previous = index < passwordLength;
 
     Color fill = AppColors.white;
-    if (current || previous) fill = AppColors.creamDarker;
+    if (current || previous) fill = AppColors.creamLighter;
 
     return Container(
       height: 50,

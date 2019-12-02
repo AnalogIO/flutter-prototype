@@ -5,9 +5,6 @@ import 'package:analog_app/utils/login_state.dart';
 
 import 'package:flutter/services.dart'; // Haptic feedback
 
-// TODO grid lines in numpad
-// TODO numpad optimization + support for icons
-
 enum NumpadActions {
   add,
   reset,
@@ -24,48 +21,55 @@ class Numpad extends StatelessWidget {
           color: (state.isPageEmail)
             ? AppColors.coffee
             : AppColors.cream,
-          padding: EdgeInsets.only(top: 12, bottom: 24),
+          padding: EdgeInsets.only(top: 16, bottom: 24),
           child: Visibility(
             visible: !state.isPageEmail,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NumpadButton("1"),
-                    NumpadButton("2"),
-                    NumpadButton("3"),
-                  ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Table(
+                border: TableBorder(
+                  horizontalInside: BorderSide(color: AppColors.creamDarker, width: 2),
+                  verticalInside: BorderSide(color: AppColors.creamDarker, width: 2),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NumpadButton("4"),
-                    NumpadButton("5"),
-                    NumpadButton("6"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NumpadButton("7"),
-                    NumpadButton("8"),
-                    NumpadButton("9"),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    NumpadButton("?", action: NumpadActions.forgot),
-                    NumpadButton("0"),
-                    NumpadButton("x", action: NumpadActions.reset),
-                  ],
-                )
-              ],
-            ),
+                children: <TableRow>[
+                  TableRow(children: [
+                    NumpadButton(text: "1"),
+                    NumpadButton(text: "2"),
+                    NumpadButton(text: "3")
+                  ]),
+                  TableRow(children: [
+                    NumpadButton(text: "4"),
+                    NumpadButton(text: "5"),
+                    NumpadButton(text: "6")
+                  ]),
+                  TableRow(children: [
+                    NumpadButton(text: "7"),
+                    NumpadButton(text: "8"),
+                    NumpadButton(text: "9")
+                  ]),
+                  TableRow(children: [
+                    TableCell(
+                      verticalAlignment: TableCellVerticalAlignment.fill,
+                      child: NumpadButton(
+                        icon: Icons.backspace,
+                        action: NumpadActions.reset
+                      )
+                    ),
+                    NumpadButton(text: "0"),
+                    TableCell(
+                      verticalAlignment: TableCellVerticalAlignment.fill,
+                      child: NumpadButton(
+                        icon: Icons.fingerprint,
+                        action: NumpadActions.biometric
+                      )
+                    )
+                  ]),
+                ],
+              ),
+            )
           ),
         );
       }
@@ -75,11 +79,13 @@ class Numpad extends StatelessWidget {
 
 class NumpadButton extends StatelessWidget {
   final String text;
+  final IconData icon;
   final NumpadActions action;
-  NumpadButton(
+  NumpadButton({
     this.text,
-    {this.action = NumpadActions.add}
-  );
+    this.icon,
+    this.action = NumpadActions.add
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +102,14 @@ class NumpadButton extends StatelessWidget {
             }
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-            child: Text(
-              text,
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Container(
+              width: 32,
+              alignment: Alignment.center,
+              child: (icon != null)
+                ? Icon(icon, size: 32)
+                : Text(text, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)
+                )
             )
           )
         );
