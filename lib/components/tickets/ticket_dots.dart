@@ -44,7 +44,6 @@ class TicketDots extends StatelessWidget {
               "+" + (amountOwned - 10).toString(),
               style: TextStyle(
                 color: AppColors.coffee,
-                fontFamily: "monospace",
                 fontSize: 14,
                 fontWeight: FontWeight.w500
               )

@@ -37,11 +37,13 @@ class TicketsPage extends StatelessWidget {
         Ticket(
           title: ALL_TICKETS['espresso']['name'],
           description: ALL_TICKETS['espresso']['desc'],
+          cost: 80,
           ownedAmount: OWNED_TICKETS[0]['espresso']
         ),
         Ticket(
           title: ALL_TICKETS['tea']['name'],
           description: ALL_TICKETS['tea']['desc'],
+          cost: 80,
           ownedAmount: 7
         ),
         SectionTitle(
@@ -51,11 +53,13 @@ class TicketsPage extends StatelessWidget {
         Ticket(
           title: ALL_TICKETS['filter']['name'],
           description: ALL_TICKETS['filter']['desc'],
+          cost: 80,
           ownedAmount: 0
         ),
         Ticket(
           title: ALL_TICKETS['syrup']['name'],
           description: ALL_TICKETS['syrup']['desc'],
+          cost: 80,
           ownedAmount: 0
         )
       ],

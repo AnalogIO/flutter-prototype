@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/login_state.dart';
+import 'package:analog_app/utils/tickets_state.dart';
 
 import 'pages/login_page.dart';
 import 'pages/tickets_page.dart';
@@ -11,7 +12,8 @@ void main() => runApp(
   MultiProvider(
     child: App(),
     providers: [
-      ChangeNotifierProvider(create: (context) => LoginState())
+      ChangeNotifierProvider(create: (context) => LoginState()),
+      ChangeNotifierProvider(create: (context) => TicketsState())
     ]
   )
 );

@@ -1,17 +1,19 @@
-import 'package:analog_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:analog_app/utils/colors.dart';
 
 class Tappable extends StatelessWidget {
   final Color color;
   final EdgeInsetsGeometry padding;
   final BorderRadius borderRadius;
+  final BoxBorder border;
   final List<BoxShadow> boxShadow;
-  final GestureTapCallback onTap;
-  final Widget child;
+  @required final GestureTapCallback onTap;
+  @required final Widget child;
   Tappable({
     this.color = Colors.transparent,
     this.padding,
     this.borderRadius,
+    this.border,
     this.boxShadow,
     this.onTap,
     this.child,
@@ -25,6 +27,7 @@ class Tappable extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: boxShadow,
         borderRadius: borderRadius,
+        border: border
       ),
       child: Material(
         color: color,

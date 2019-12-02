@@ -1,16 +1,27 @@
-import 'package:analog_app/components/tappable.dart';
 import 'package:flutter/material.dart';
 import 'package:analog_app/utils/colors.dart';
+import 'package:analog_app/utils/tickets_state.dart';
+
+import 'package:analog_app/components/loader.dart';
+import 'package:analog_app/components/tappable.dart';
 import 'package:analog_app/components/tickets/ticket_dots.dart';
+
+import 'package:screen/screen.dart'; // Screen brightness
+import 'package:flutter/services.dart'; // Haptic feedback
+import 'package:provider/provider.dart';
 
 class Ticket extends StatefulWidget {
   final String title;
   final String description;
+  final int cost;
+  final int bundleSize;
   final int ownedAmount;
   Ticket({
-    this.title,
-    this.description,
-    this.ownedAmount
+    @required this.title,
+    @required this.description,
+    @required this.cost,
+    this.bundleSize = 10,
+    this.ownedAmount,
   });
 
   @override
@@ -18,17 +29,30 @@ class Ticket extends StatefulWidget {
 }
 
 class _TicketState extends State<Ticket> {
+  final _ticketKey = UniqueKey();
+
   bool get owned => widget.ownedAmount > 0;
+  bool get selected {
+    Key s = Provider.of<TicketsState>(context, listen: false).selectedTicket;
+    return s == _ticketKey;
+  }
+
+  void onTap() {
+    HapticFeedback.lightImpact();
+    Provider.of<TicketsState>(context, listen: true).selectedTicket = _ticketKey;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       child: Tappable(
-        onTap: () => null,
+        onTap: (selected)
+          ? null
+          : onTap,
         borderRadius: BorderRadius.circular(24),
         color: (owned)
-          ? AppColors.creamDarker
+          ? AppColors.creamLighter
           : AppColors.white,
         boxShadow: [BoxShadow(
           color: (owned)
@@ -39,7 +63,7 @@ class _TicketState extends State<Ticket> {
           spreadRadius: 0,
         )],
         child: Container(
-          height: 190,
+          height: 200,
           padding: EdgeInsets.fromLTRB(24, 24, 24, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +92,10 @@ class _TicketState extends State<Ticket> {
               Expanded(child: Container()), // Pushes TicketFooter to bottom
               TicketFooter(
                 owned: owned,
-                ownedAmount: widget.ownedAmount
+                ownedAmount: widget.ownedAmount,
+                cost: widget.cost,
+                bundleSize: widget.bundleSize,
+                selected: selected
               )
             ]
           )
@@ -81,25 +108,109 @@ class _TicketState extends State<Ticket> {
 class TicketFooter extends StatelessWidget {
   final bool owned;
   final int ownedAmount;
+  final int cost;
+  final int bundleSize;
+  final bool selected;
   TicketFooter({
     this.owned,
-    this.ownedAmount
+    this.ownedAmount,
+    this.cost,
+    this.bundleSize,
+    this.selected
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(bottom: 8),
-          child: (owned)
-            ? TicketDots(amountOwned: ownedAmount)
-            : null
-        ),
-        TicketFooterText(owned, ownedAmount)
-      ],
+    return Visibility(
+      visible: selected,
+      child: FutureBuilder(
+        future: Future.delayed(Duration(milliseconds: 600)),
+        builder: (c, s) => s.connectionState == ConnectionState.done
+          ? TicketFooterConfirm(false)
+          : TicketFooterConfirm(true)
+      ),
+      replacement: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(bottom: 8),
+            child: (owned)
+              ? TicketDots(amountOwned: ownedAmount)
+              : null
+          ),
+          TicketFooterText(
+            owned: owned,
+            ownedAmount: ownedAmount,
+            cost: cost,
+            bundleSize: bundleSize,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TicketFooterConfirm extends StatelessWidget {
+  final bool waiting;
+  TicketFooterConfirm(this.waiting);
+
+  @override
+  Widget build(BuildContext context) {
+    void onConfirm() => null;
+    void onCancel() {
+      Provider.of<TicketsState>(context, listen: true).selectedTicket = null;
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,    
+        children: <Widget>[
+          Tappable(
+            onTap: onCancel,
+            color: Colors.transparent,
+            border: Border.all(
+              color: AppColors.coffee,
+              width: 2
+            ),
+            borderRadius: BorderRadius.circular(40),
+            child: Container(
+              width: 35,
+              height: 35,
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.clear,
+                color: AppColors.coffee,
+                size: 18,
+              ),
+            ),
+          ),
+          Container(width: 8),
+          Tappable(
+            onTap: (waiting)
+              ? null
+              : onConfirm,
+            color: AppColors.coffee,
+            borderRadius: BorderRadius.circular(40),
+            child: Container(
+              width: 129,
+              height: 39,
+              alignment: Alignment.center,
+              child: (waiting)
+                ? Loader()
+                : Text(
+                  "Use Ticket",
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -107,10 +218,14 @@ class TicketFooter extends StatelessWidget {
 class TicketFooterText extends StatelessWidget {
   final bool owned;
   final int ownedAmount;
-  TicketFooterText(
+  final int cost;
+  final int bundleSize;
+  TicketFooterText({
     this.owned,
-    this.ownedAmount
-  );
+    this.ownedAmount,
+    this.cost,
+    this.bundleSize
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +238,7 @@ class TicketFooterText extends StatelessWidget {
           child: Text(
             (owned)
               ? "Tickets left"
-              : "Buy X tickets",
+              : "Buy $bundleSize tickets",
             style: TextStyle(
               color: AppColors.coffee,
               fontSize: 16
@@ -147,10 +262,10 @@ class TicketFooterText extends StatelessWidget {
         Text(
           (owned)
             ? ownedAmount.toString()
-            : "60",
+            : cost.toString(),
           style: TextStyle(
             color: AppColors.coffee,
-            fontSize: 46,
+            fontSize: 46/*TODO Decide if 46 or 16*/,
             fontWeight: FontWeight.bold
           )
         )

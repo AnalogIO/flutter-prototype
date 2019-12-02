@@ -1,5 +1,5 @@
 import 'package:analog_app/utils/enums.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart'; TODO needed?
 import 'package:flutter/material.dart';
 
 class LoginState extends ChangeNotifier {
