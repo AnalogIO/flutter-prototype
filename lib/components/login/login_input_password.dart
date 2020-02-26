@@ -38,21 +38,38 @@ class PasswordCircle extends StatelessWidget {
     bool current = index == passwordLength;
     bool previous = index < passwordLength;
 
-    Color fill = AppColors.white;
-    if (current || previous) fill = AppColors.creamLighter;
+    Color fill = AppColors.white.withAlpha(70);
+
+    double opacity = 1; // TODO Use
+    double borderWidth = 0;
+    Color borderColor = Colors.transparent;
+
+    if (current) {
+      opacity = 0;
+      // borderColor = AppColors.creamLighter;
+      // borderWidth = 4;
+    }
+    if (previous) {
+      fill = AppColors.white;
+      // borderColor = AppColors.coffee;
+      // borderWidth = 12;
+    }
+    if (isError) {
+      fill = AppColors.orange;
+      // borderColor = AppColors.orange;
+      // borderWidth = 4;
+    }
 
     return Container(
-      height: 50,
-      width: 50,
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      width: 20,
+      height: 20,
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       decoration: BoxDecoration(
         color: fill,
-        borderRadius: BorderRadius.circular(50),
+        shape: BoxShape.circle,
         border: Border.all(
-          width: (current || isError) ? 4 : 0,
-          color: (isError)
-            ? AppColors.orange
-            : AppColors.white
+          color: borderColor,
+          width: borderWidth
         )
       )
     );
