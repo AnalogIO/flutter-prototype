@@ -1,3 +1,4 @@
+import 'package:analog_app/utils/reciept_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:analog_app/utils/colors.dart';
 import 'package:analog_app/utils/tickets_state.dart';
@@ -37,9 +38,13 @@ class _TicketState extends State<Ticket> {
     return s == _ticketKey;
   }
 
-  void onTap() {
+  void spendTicket() {
     HapticFeedback.lightImpact();
     Provider.of<TicketsState>(context, listen: true).selectedTicket = _ticketKey;
+  }
+  void buyTicket() {
+    HapticFeedback.lightImpact();
+    // TODO Buy Ticket function
   }
 
   @override
@@ -47,9 +52,9 @@ class _TicketState extends State<Ticket> {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       child: Tappable(
-        onTap: (selected)
-          ? null
-          : onTap,
+        onTap: (owned)
+          ? (!selected ? spendTicket : null)
+          : buyTicket,
         borderRadius: BorderRadius.circular(24),
         color: (owned)
           ? AppColors.creamLighter
@@ -121,15 +126,16 @@ class TicketFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: selected,
-      child: FutureBuilder(
+    return AnimatedCrossFade(
+      duration: Duration(milliseconds: 250),
+      crossFadeState: selected ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+      firstChild: FutureBuilder(
         future: Future.delayed(Duration(milliseconds: 600)),
         builder: (c, s) => s.connectionState == ConnectionState.done
           ? TicketFooterConfirm(false)
           : TicketFooterConfirm(true)
       ),
-      replacement: Row(
+      secondChild: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
@@ -157,7 +163,18 @@ class TicketFooterConfirm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onConfirm() => null;
+
+    Future onConfirm() async {
+      // TODO Not correct way of resetting brightness
+      double normalBrightness = await Screen.brightness;
+      Provider.of<TicketsState>(context, listen: true).selectedTicket = null;
+      Screen.setBrightness(1);
+      await RecieptHandler.showReciept(context);
+      // TODO Not correct way of resetting brightness
+      Screen.setBrightness(normalBrightness);
+      return null;
+    }
+
     void onCancel() {
       Provider.of<TicketsState>(context, listen: true).selectedTicket = null;
     }
@@ -188,9 +205,9 @@ class TicketFooterConfirm extends StatelessWidget {
           ),
           Container(width: 8),
           Tappable(
-            onTap: (waiting)
-              ? null
-              : onConfirm,
+            onTap: (!waiting && Provider.of<TicketsState>(context, listen: false).selectedTicket != null)
+              ? onConfirm
+              : null,
             color: AppColors.coffee,
             borderRadius: BorderRadius.circular(40),
             child: Container(
