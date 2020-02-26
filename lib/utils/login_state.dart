@@ -101,9 +101,9 @@ class LoginState extends ChangeNotifier {
     // TODO handle login
     /// on fail : clear password on fail
     /// on success : save credentials + set _token
-
-    // _token = "DELET THIS NEPHEW";
-    _errorText = "Error message\n";
+    
+    // _token = "????";
+    _errorText = "Error: Not implemented\nTap (?) to skip";
 
     _loginProcessing = false;
   }
