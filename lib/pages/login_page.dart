@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         ]
       ),
       body: Container(
-        color: AppColors.coffee,
+        color: AppColors.primary,
         child: Column(
           children: <Widget>[
             LoginUpper(),
@@ -51,7 +51,7 @@ class LoginUpper extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: EdgeInsets.fromLTRB(60, 0, 60, 60),
-        color: AppColors.coffee,
+        color: AppColors.primary,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

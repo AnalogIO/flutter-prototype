@@ -25,10 +25,10 @@ class TicketDots extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
                   color: (amountOwned > index)
-                    ? AppColors.coffeeLighter
+                    ? AppColors.secondary
                     : Colors.transparent,
                   border: Border.all(
-                    color: AppColors.coffee,
+                    color: AppColors.primary,
                     width: 2
                   )
                 ),
@@ -43,7 +43,7 @@ class TicketDots extends StatelessWidget {
             child: Text(
               "+" + (amountOwned - 10).toString(),
               style: TextStyle(
-                color: AppColors.coffee,
+                color: AppColors.primary,
                 fontSize: 14,
                 fontWeight: FontWeight.w500
               )

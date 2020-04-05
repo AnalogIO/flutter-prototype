@@ -18,7 +18,7 @@ abstract class RecieptHandler {
               Text(
                 "Ticket used",
                 style: TextStyle(
-                  color: AppColors.coffee,
+                  color: AppColors.primary,
                   fontSize: 16,
                 ),
               ),
@@ -27,7 +27,7 @@ abstract class RecieptHandler {
                 child: Text(
                   "Name of drink :)",
                   style: TextStyle(
-                    color: AppColors.coffee,
+                    color: AppColors.primary,
                     fontSize: 26,
                     fontWeight: FontWeight.bold
                   ),
@@ -36,7 +36,7 @@ abstract class RecieptHandler {
               Text(
                 "Just now",
                 style: TextStyle(
-                  color: AppColors.coffee,
+                  color: AppColors.primary,
                   fontSize: 16,
                   fontWeight: FontWeight.bold
                 ),
@@ -44,7 +44,7 @@ abstract class RecieptHandler {
               Text(
                 "Friday 6/12 2019 14:31",
                 style: TextStyle(
-                  color: AppColors.coffee,
+                  color: AppColors.primary,
                   fontSize: 16,
                 ),
               ),
@@ -54,7 +54,7 @@ abstract class RecieptHandler {
                   "This can be found\nagain under Reciepts.",
                   softWrap: true,
                   style: TextStyle(
-                    color: AppColors.coffeeLighter,
+                    color: AppColors.secondary,
                     fontSize: 12
                   ),
                 ),
@@ -63,7 +63,7 @@ abstract class RecieptHandler {
                 "Tap anywhere to dismiss",
                 textAlign: TextAlign.right,
                 style: TextStyle(
-                  color: AppColors.coffee,
+                  color: AppColors.primary,
                   fontSize: 12,
                   fontWeight: FontWeight.bold
                 ),

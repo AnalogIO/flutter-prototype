@@ -22,7 +22,7 @@ class Tappable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool lightSplash =
-      (color == AppColors.white || color == AppColors.coffee);
+      (color == AppColors.white || color == AppColors.primary);
     return Container(
       decoration: BoxDecoration(
         boxShadow: boxShadow,
@@ -35,10 +35,10 @@ class Tappable extends StatelessWidget {
         child: InkWell(
           highlightColor: (lightSplash)
             ? null
-            : AppColors.coffee.withOpacity(0.12),
+            : AppColors.primary.withOpacity(0.12),
           splashColor: (lightSplash)
             ? null
-            : AppColors.coffee.withOpacity(0.12),
+            : AppColors.primary.withOpacity(0.12),
           onTap: onTap,
           borderRadius: borderRadius,
           child: Container(

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const Color coffee = Color(0xff362619);
-  static const Color coffeeLighter = Color(0xff785B38);
-  static const Color cream = Color(0xffE5E2D7);
-  static const Color creamLighter = Color(0xffD9CB9D);
-  static const Color creamDarker = Color(0xffB9B4A3);
+  static const Color primary = Color(0xff362619);
+  static const Color secondary = Color(0xff785B38);
+  static const Color background = Color(0xffE5E2D7);
+  static const Color ticket = Color(0xffD9CB9D);
+
   static const Color white = Color(0xffFAFAFA);
-  static const Color orange = Colors.orange;
+  static const Color gray = Color(0xff767676);
+  static const Color lightGray = Color(0xffC2C2C2);
+  
+  static const Color highlight = Color(0xffFF9500);
+  static const Color slightlyHighlighted = Color(0xffFEF4D2);
+  static const Color success = Color(0xff4CAF50);
+  static const Color error = Color(0xffFF4D00);
 }

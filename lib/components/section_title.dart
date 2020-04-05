@@ -20,7 +20,7 @@ class SectionTitle extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: AppColors.coffee,
+              color: AppColors.primary,
               fontSize: 20,
               fontWeight: FontWeight.bold
             )
@@ -36,7 +36,7 @@ class SectionTitleSideButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tappable(
-      color: AppColors.coffee,
+      color: AppColors.primary,
       borderRadius: BorderRadius.circular(8),
       padding: EdgeInsets.fromLTRB(12, 6, 8, 6),
       onTap: () => null,

@@ -19,8 +19,8 @@ class Numpad extends StatelessWidget {
       builder: (context, state, child) {
         return Container(
           color: (state.isPageEmail)
-            ? AppColors.coffee
-            : AppColors.cream,
+            ? AppColors.primary
+            : AppColors.white,
           padding: EdgeInsets.only(top: 16, bottom: 24),
           child: Visibility(
             visible: !state.isPageEmail,
@@ -31,8 +31,8 @@ class Numpad extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Table(
                 border: TableBorder(
-                  horizontalInside: BorderSide(color: AppColors.creamDarker, width: 2),
-                  verticalInside: BorderSide(color: AppColors.creamDarker, width: 2),
+                  horizontalInside: BorderSide(color: AppColors.lightGray, width: 2),
+                  verticalInside: BorderSide(color: AppColors.lightGray, width: 2),
                 ),
                 children: <TableRow>[
                   TableRow(children: [

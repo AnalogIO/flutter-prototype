@@ -1,6 +1,6 @@
 # Café Analog App Redesign
 
-Flutter implementation of [analog-redesign](https://xd.adobe.com/view/820b9510-a12e-4f14-6c7e-ff8ecb99d78f-f43a/), a design protoype for a new clip card app.
+Flutter implementation of [analog-redesign](https://xd.adobe.com/view/820b9510-a12e-4f14-6c7e-ff8ecb99d78f-f43a/), a new design for Café Analog's clip card app.
 
 ## Flutter: Getting Started
 

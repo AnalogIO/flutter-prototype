@@ -23,7 +23,7 @@ class _LoginInputHintState extends State<LoginInputHint> {
             style: TextStyle(
               color: (state.errorText.isEmpty)
                 ? AppColors.white
-                : AppColors.orange,
+                : AppColors.highlight,
               fontSize: 14
             ),
           ),

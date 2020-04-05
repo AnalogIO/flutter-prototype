@@ -55,7 +55,7 @@ class PasswordCircle extends StatelessWidget {
       // borderWidth = 12;
     }
     if (isError) {
-      fill = AppColors.orange;
+      fill = AppColors.highlight;
       // borderColor = AppColors.orange;
       // borderWidth = 4;
     }

@@ -57,11 +57,11 @@ class _TicketState extends State<Ticket> {
           : buyTicket,
         borderRadius: BorderRadius.circular(24),
         color: (owned)
-          ? AppColors.creamLighter
+          ? AppColors.ticket
           : AppColors.white,
         boxShadow: [BoxShadow(
           color: (owned)
-            ? AppColors.coffeeLighter
+            ? AppColors.secondary
             : Color.fromRGBO(0, 0, 0, 0.15),
           offset: Offset(0, 3),
           blurRadius: 0,
@@ -76,7 +76,7 @@ class _TicketState extends State<Ticket> {
               Text(
                 widget.title,
                 style: TextStyle(
-                  color: AppColors.coffee,
+                  color: AppColors.primary,
                   fontSize: 26,
                   fontWeight: FontWeight.bold
                 ),
@@ -88,7 +88,7 @@ class _TicketState extends State<Ticket> {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: AppColors.coffeeLighter,
+                    color: AppColors.secondary,
                     fontSize: 14,
                     fontWeight: FontWeight.w500
                   ),
@@ -188,7 +188,7 @@ class TicketFooterConfirm extends StatelessWidget {
             onTap: onCancel,
             color: Colors.transparent,
             border: Border.all(
-              color: AppColors.coffee,
+              color: AppColors.primary,
               width: 2
             ),
             borderRadius: BorderRadius.circular(40),
@@ -198,7 +198,7 @@ class TicketFooterConfirm extends StatelessWidget {
               alignment: Alignment.center,
               child: Icon(
                 Icons.clear,
-                color: AppColors.coffee,
+                color: AppColors.primary,
                 size: 18,
               ),
             ),
@@ -208,7 +208,7 @@ class TicketFooterConfirm extends StatelessWidget {
             onTap: (!waiting && Provider.of<TicketsState>(context, listen: false).selectedTicket != null)
               ? onConfirm
               : null,
-            color: AppColors.coffee,
+            color: AppColors.primary,
             borderRadius: BorderRadius.circular(40),
             child: Container(
               width: 129,
@@ -257,7 +257,7 @@ class TicketFooterText extends StatelessWidget {
               ? "Tickets left"
               : "Buy $bundleSize tickets",
             style: TextStyle(
-              color: AppColors.coffee,
+              color: AppColors.primary,
               fontSize: 16
             )
           ),
@@ -269,7 +269,7 @@ class TicketFooterText extends StatelessWidget {
             child: Text(
               "DKK",
               style: TextStyle(
-                color: AppColors.coffee,
+                color: AppColors.primary,
                 fontSize: 16,
                 fontWeight: FontWeight.bold
               )
@@ -281,7 +281,7 @@ class TicketFooterText extends StatelessWidget {
             ? ownedAmount.toString()
             : cost.toString(),
           style: TextStyle(
-            color: AppColors.coffee,
+            color: AppColors.primary,
             fontSize: 46/*TODO Decide if 46 or 16*/,
             fontWeight: FontWeight.bold
           )

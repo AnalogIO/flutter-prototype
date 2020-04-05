@@ -12,7 +12,7 @@ class LoginInputEmail extends StatelessWidget {
     builder: (context, state, child) {
       final RegExp regExEmail = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
       final errorBorder = OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.orange, width: 4),
+        borderSide: BorderSide(color: AppColors.highlight, width: 4),
         borderRadius: BorderRadius.all(Radius.circular(32)),
       );
 
@@ -23,7 +23,7 @@ class LoginInputEmail extends StatelessWidget {
         decoration: InputDecoration(
           hintText: "Email...",
           contentPadding: EdgeInsets.fromLTRB(24, 16, 64, 16),
-          errorStyle: TextStyle(color: AppColors.orange, height: 0, fontSize: 0),
+          errorStyle: TextStyle(color: AppColors.highlight, height: 0, fontSize: 0),
           fillColor: AppColors.white,
           filled: true,
           errorBorder: errorBorder,
